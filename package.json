@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "dokku": {
-      "predeploy": "npm run build"
+      "predeploy": "yarn build"
     }
   },
   "dependencies": {

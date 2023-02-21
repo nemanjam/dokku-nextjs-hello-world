@@ -25,6 +25,12 @@ docker exec -it dokku bash dokku buildpacks:add nextjs-blank-dokku https://githu
 docker exec -it dokku bash dokku builder-herokuish:set nextjs-blank-dokku allowed true
 docker exec -it dokku bash dokku builder-herokuish:set --global allowed true
 
+docker exec -it dokku bash dokku config:show nextjs-blank-dokku
+
+docker exec -it dokku bash dokku ps:report
+
+# https://oscarchou.com/posts/handbook/dokku-command-cheatsheet/
+docker exec -it dokku bash dokku config:set nextjs-blank-dokku DOKKU_PROXY_PORT="3000"
 
 ```
 
