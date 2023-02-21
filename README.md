@@ -63,4 +63,36 @@ ssh-keygen -f "/home/username/.ssh/known_hosts" -R "[dokku.arm1.localhost3002.li
 
 ```
 
+### Main error
 
+
+```bash
+username@computer:~/Desktop/nextjs-blank-dokku$ git push dokku main:master
+Enumerating objects: 44, done.
+Counting objects: 100% (44/44), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (39/39), done.
+Writing objects: 100% (44/44), 56.72 KiB | 2.47 MiB/s, done.
+Total 44 (delta 12), reused 0 (delta 0), pack-reused 0
+remote:  !     Herokuish builder not supported on arm64 servers.
+remote:  !     Switching to pack builder.
+-----> Cleaning up...
+-----> Building nextjs-blank-dokku from cnb stack heroku/buildpacks (experimental)...
+latest: Pulling from heroku/buildpacks
+Digest: sha256:149ba2eceb2f3aba18328ea5fdc15a245952cd28b083f3cdd3ff8d19f37170fa
+Status: Image is up to date for heroku/buildpacks:latest
+20-cnb: Pulling from heroku/heroku
+Digest: sha256:5b8bfd56b2862648234ac7b9528e407827d9e0f42748910e16b05b9dd03ec0d7
+Status: Image is up to date for heroku/heroku:20-cnb
+0.16.0: Pulling from buildpacksio/lifecycle
+Digest: sha256:f75a04887fced3ae0504a37edb2c0d29d366511cd9ede34dbb90c5282b106e79
+Status: Image is up to date for buildpacksio/lifecycle:0.16.0
+===> ANALYZING
+remote: [analyzer] exec /cnb/lifecycle/analyzer: exec format error
+remote: ERROR: failed to build: executing lifecycle. This may be the result of using an untrusted builder: failed with status code: 1
+remote:  !     Removing invalid image tag dokku/nextjs-blank-dokku:latest
+remote:  !     App build failed
+To dokku.arm1.localhost3002.live:nextjs-blank-dokku
+ ! [remote rejected] main -> master (pre-receive hook declined)
+error: failed to push some refs to 'dokku.arm1.localhost3002.live:nextjs-blank-dokku'
+```
