@@ -118,3 +118,49 @@ docker exec -it dokku bash dokku buildpacks:report
 Buildpacks computed stack:     gliderlabs/herokuish:latest-20
 
 ```
+
+```bash
+docker exec -it dokku bash dokku buildpacks:remove nextjs-blank-dokku https://github.com/heroku/heroku-buildpack-nodejs.git
+
+https://dev.to/emdienn/deploy-sveltekit-on-dokku-in-8-sort-of-easy-steps-28g2
+
+docker exec -it dokku bash dokku buildpacks:set-property --global stack paketobuildpacks/builder:base
+
+docker exec -it dokku bash dokku buildpacks:set-property --global stack heroku/builder:22
+
+
+
+# unset globally
+https://dokku.com/docs~v0.25.7/deployment/builders/herokuish-buildpacks/#removing-a-buildpack
+
+
+# set globally
+dokku buildpacks:set-property --global stack gliderlabs/herokuish:latest
+
+# unset globally
+docker exec -it dokku bash dokku buildpacks:set-property --global stack
+```
+
+### Solution
+
+```ts
+// can use main, no need for master
+git push dokku main:main
+
+// can use default
+gliderlabs/herokuish:latest
+
+// solves all arm64 dependencies, postgres, node.js...
+https://featurist.co.uk/blog/hosting-rails-apps-for-free-on-oracle-cloud-with-dokku
+https://www.reddit.com/r/docker/comments/ray2wc/comment/hnluex8
+https://stackoverflow.com/questions/67017795/npm-install-is-failing-with-docker-buildx-linux-arm64
+https://github.com/tonistiigi/binfmt
+https://hub.docker.com/r/tonistiigi/binfmt
+
+// this line, container installs and configures the host
+docker run --privileged --rm tonistiigi/binfmt --install all
+
+// todo:
+routing and https fails, add dokku config
+
+```
