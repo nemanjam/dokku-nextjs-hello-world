@@ -164,3 +164,21 @@ docker run --privileged --rm tonistiigi/binfmt --install all
 routing and https fails, add dokku config
 
 ```
+
+### Fix routing
+
+docker exec -it dokku bash dokku domains:report --global
+
+docker exec -it dokku bash dokku domains:report nextjs-blank-dokku
+
+docker exec -it dokku bash dokku proxy:ports nextjs-blank-dokku
+
+
+### Lets encrypt https
+
+docker exec -it dokku bash dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+docker exec -it dokku bash dokku config:set --no-restart nextjs-blank-dokku DOKKU_LETSENCRYPT_EMAIL=acczasearchapi@gmail.com
+
+docker exec -it dokku bash dokku letsencrypt:set nextjs-blank-dokku acczasearchapi@gmail.com
+
+docker exec -it dokku bash dokku letsencrypt:enable nextjs-blank-dokku acczasearchapi@gmail.com
