@@ -96,3 +96,25 @@ To dokku.arm1.localhost3002.live:nextjs-blank-dokku
  ! [remote rejected] main -> master (pre-receive hook declined)
 error: failed to push some refs to 'dokku.arm1.localhost3002.live:nextjs-blank-dokku'
 ```
+
+```bash
+# 23. feb
+// u app src
+// pack builder suggest
+ubuntu@arm1:~/traefik-proxy/apps/mern-boilerplate$ pack builder suggest
+Suggested builders:
+Google:                gcr.io/buildpacks/builder:v1      
+Heroku:                heroku/builder:22
+Heroku:                heroku/buildpacks:20
+Paketo Buildpacks:     paketobuildpacks/builder:base
+Paketo Buildpacks:     paketobuildpacks/builder:full
+Paketo Buildpacks:     paketobuildpacks/builder:tiny 
+---
+// you are using a pack builder that doesnt work on arm64
+-----
+docker exec -it dokku bash dokku buildpacks:set nextjs-blank-dokku https://github.com/heroku/heroku-buildpack-nodejs.git
+
+docker exec -it dokku bash dokku buildpacks:report
+Buildpacks computed stack:     gliderlabs/herokuish:latest-20
+
+```
