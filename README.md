@@ -226,3 +226,29 @@ Traefik has passthrough, Dokku must handle ssl
 ```
 Error while dialing backend: dial tcp 172.21.0.4:443: connect: connection refused"
 ```
+
+curl http://nextjs-app.dokku.arm1.localhost3002.live
+curl https://nextjs-app.dokku.arm1.localhost3002.live
+
+### Solve let Dokku http through Traefik https
+
+https://dokku.com/docs/networking/proxies/nginx/#hsts-header
+
+```bash
+username@computer3:~/Desktop/dokku-nextjs-hello-world$ curl https://nextjs-app.dokku.arm1.localhost3002.live
+curl: (35) error:0A000126:SSL routines::unexpected eof while reading
+
+dokku nginx:set --global hsts false
+
+dokku ps:stop nextjs-blank-dokku
+dokku ps:start nextjs-blank-dokku
+```
+
+### Lets encrypt
+
+https://github.com/dokku/dokku-letsencrypt
+
+dokku letsencrypt:set --global email your@email.tld
+
+dokku letsencrypt:enable nextjs-app
+
