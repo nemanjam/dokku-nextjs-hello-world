@@ -173,8 +173,16 @@ docker exec -it dokku bash dokku domains:report nextjs-blank-dokku
 
 docker exec -it dokku bash dokku proxy:ports nextjs-blank-dokku
 
+### Check if app container is running, not only Dokku container - Process Management
+
+docker exec -it dokku bash dokku ps:start nextjs-blank-dokku
+
 
 ### Lets encrypt https
+
+this is plugin, not dokku config
+
+https://github.com/dokku/dokku-letsencrypt
 
 docker exec -it dokku bash dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
 docker exec -it dokku bash dokku config:set --no-restart nextjs-blank-dokku DOKKU_LETSENCRYPT_EMAIL=acczasearchapi@gmail.com
