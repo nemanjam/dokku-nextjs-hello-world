@@ -193,3 +193,36 @@ docker exec -it dokku bash dokku config:set --no-restart nextjs-blank-dokku DOKK
 docker exec -it dokku bash dokku letsencrypt:set nextjs-blank-dokku acczasearchapi@gmail.com
 
 docker exec -it dokku bash dokku letsencrypt:enable nextjs-blank-dokku acczasearchapi@gmail.com
+
+---
+---
+
+# After solved network error
+
+### Add remote, create app and push
+
+```bash
+git remote add dokku dokku@dokku.arm1.localhost3002.live:nextjs-app
+
+dokku apps:create nextjs-app
+
+dokku apps:list
+
+# check if added
+dokku network:report node-app
+
+git push dokku main:main
+```
+
+Traefik wont request cert for http app route
+
+```bash
+ubuntu@arm1:~/traefik-proxy/core$ curl https://node-app.dokku.arm1.localhost3002.live/
+curl: (35) error:0A000126:SSL routines::unexpected eof while reading
+```
+
+Traefik has passthrough, Dokku must handle ssl
+
+```
+Error while dialing backend: dial tcp 172.21.0.4:443: connect: connection refused"
+```
