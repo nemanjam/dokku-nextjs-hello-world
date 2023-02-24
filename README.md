@@ -177,6 +177,9 @@ docker exec -it dokku bash dokku proxy:ports nextjs-blank-dokku
 
 docker exec -it dokku bash dokku ps:start nextjs-blank-dokku
 
+#### Rebuild
+
+docker exec -it dokku bash dokku ps:rebuild nextjs-blank-dokku
 
 ### Lets encrypt https
 
